@@ -3,6 +3,8 @@ import { ModuleRenderer } from "@/components/ModuleRenderer";
 import { Sidebar } from "@/components/Sidebar";
 import { getCvMeta, getProjectBySlug, getProjectContent, getProjects, normalizeLocale } from "@/lib/content";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const projects = getProjects();
   return ["zh", "en"].flatMap((locale) => projects.map((project) => ({ locale, slug: project.slug })));
