@@ -1,0 +1,37 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/00/d7dbdfad42631df10aef8172071a8607.png"
+    },
+    {
+      "type": "intro",
+      "body": "徐铭亨\n\n1296830059@qq.com"
+    },
+    {
+      "type": "text",
+      "title": "教育",
+      "body": "武汉大学\n城市设计学院\n设计系\n产品设计\n2024-2028"
+    },
+    {
+      "type": "text",
+      "title": "奖项",
+      "body": "#武汉大学甲等奖学金/专项奖学金 2025\n#Award 360° 年度数字媒体设计入围 2025\n＃靳埭强设计奖 学生组 优秀奖 2025"
+    },
+    {
+      "type": "text",
+      "title": "经历",
+      "body": "武汉大学学生会-珞珈创意设计工作室负责人2024.9 -\n中国美术学院人工智能艺术创新实验室成员 2026.4 -"
+    },
+    {
+      "type": "text",
+      "title": "工具",
+      "body": "Adobe\nFigma\nRhino/Grasshopper\nBlender\nProcessing\ntouchDesigner\nUE\nUnity"
+    },
+    {
+      "type": "text",
+      "title": "方向",
+      "body": "#用户体验设计\n#人机交互设计/艺术\n#视觉设计\n#设计思辨\n#图形与动态设计\n#XR设计"
+    }
+  ]
+}

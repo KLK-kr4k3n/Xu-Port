@@ -1,0 +1,27 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+    },
+    {
+      "type": "video",
+      "src": "/media/04/content_slots/02_video_upload/kine.mp4"
+    },
+    {
+      "type": "intro",
+      "body": "校企合作项目，围绕企业提供的具体产品概念进行设计：一款口袋式 AI 健身教练产品，重点研究智能硬件在运动场景中的 CMF 语言、结构逻辑、使用流程与产品生态。产品由一个带摄像头的便携主机与耳机反馈装置组成，可通过蓝牙连接手机、平板或电视，在训练过程中提供动作识别、状态反馈、训练记录与多屏协同体验。\n\n在产品定义上，项目关注“轻量携带 + 视觉识别 + 运动陪伴”的复合需求。主机需要适合手持、口袋收纳与桌面摆放，同时具备摄像头朝向、屏幕可读性、按键操作与远距离状态识别等功能条件。\n\n在 CMF 研究上，项目参考了高饱和运动品牌语言、半透明科技产品、凝胶感材料、微肋纹表面、喷涂工艺、磨砂塑料、透明壳体与内部结构可视化等方向，试图形成一种介于运动、科技与未来感之间的产品气质。尤其是半透明与不透明材质的对比，使产品可以同时表达“专业设备感”和“轻量消费电子感”。\n\n该项目将产品使用流程、硬件结构、材料工艺、人体尺度与品牌视觉气质融合进工业产品设计流程中，并引入个人风格化概念表达。"
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/04/content_slots/03_overview/A.png",
+        "/media/04/content_slots/03_overview/A0.png",
+        "/media/04/content_slots/03_overview/A1.png",
+        "/media/04/content_slots/03_overview/A2.png",
+        "/media/04/content_slots/03_overview/A3.png",
+        "/media/04/content_slots/03_overview/A4.png"
+      ]
+    }
+  ]
+}

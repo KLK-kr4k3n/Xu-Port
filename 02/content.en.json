@@ -1,0 +1,34 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png"
+    },
+    {
+      "type": "video",
+      "src": "/media/02/content_slots/02_video_upload/XinXue_1.mp4"
+    },
+    {
+      "type": "intro",
+      "body": "Algorithmic Xinxue is a digital media experiment that connects Chinese Xinxue philosophy, real-time interaction systems, and generative image technology. Based on Wang Yangming's ideas such as mind as principle, innate knowing, the unity of knowledge and action, the obscuring of selfish desire, and cultivation through practice, the project attempts to translate abstract philosophical structures into an operational, perceptible, and interactive algorithmic system."
+    },
+    {
+      "type": "text",
+      "body": "The core mechanism of the project is disturbance, feedback, and return to stability. Viewers intervene through bodily movement, breaking an originally stable visual state. The system then transforms this disturbance into an evolving image process through feedback, delay, layering, decay, and recovery. In its early stage, the project used TouchDesigner to build fractal, feedback, noise, and brightness-field systems, while MediaPipe captured hand opening gestures and mapped them to visual parameters, making the body an entry point for activating philosophical concepts."
+    },
+    {
+      "type": "text",
+      "body": "In the later technical path, the project plans to integrate StreamDiffusion, translating real-time noise fields into concrete images such as monochrome mountains, water, forests, and trees as a visual process from chaos to manifestation: noise, concealment, emergence, and condensation form an image-based narrative about mind, perception, and action."
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/02/content_slots/03_overview/3.jpg",
+        "/media/02/content_slots/03_overview/4.jpg",
+        "/media/02/content_slots/03_overview/5.png",
+        "/media/02/content_slots/03_overview/6.png",
+        "/media/02/content_slots/03_overview/11.jpg"
+      ]
+    }
+  ]
+}

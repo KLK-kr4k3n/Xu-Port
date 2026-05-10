@@ -1,0 +1,27 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+    },
+    {
+      "type": "video",
+      "src": "/media/04/content_slots/02_video_upload/kine.mp4"
+    },
+    {
+      "type": "intro",
+      "body": "This school-enterprise collaboration project is based on a specific product concept provided by a company: a pocket-sized AI fitness coach. It focuses on the CMF language, structural logic, use flow, and product ecosystem of smart hardware in sports scenarios. The product consists of a portable camera-equipped main unit and an earphone feedback device. It can connect to a phone, tablet, or television through Bluetooth, providing motion recognition, status feedback, training records, and multi-screen collaboration during workouts.\n\nIn product definition, the project responds to the combined needs of lightweight portability, visual recognition, and exercise companionship. The main unit needs to support handheld use, pocket storage, and desktop placement, while also considering camera orientation, screen readability, button operation, and long-distance status recognition.\n\nFor CMF research, the project references high-saturation sports brand language, translucent technology products, gel-like materials, micro-ribbed surfaces, spray finishing, matte plastics, transparent shells, and visible internal structures. It aims to form a product character between sports, technology, and futurity. In particular, the contrast between translucent and opaque materials allows the product to express both professional equipment and lightweight consumer electronics.\n\nThe project integrates product use flow, hardware structure, material processes, human body scale, and brand visual temperament into an industrial product design workflow, while introducing a personally stylized conceptual expression."
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/04/content_slots/03_overview/A.png",
+        "/media/04/content_slots/03_overview/A0.png",
+        "/media/04/content_slots/03_overview/A1.png",
+        "/media/04/content_slots/03_overview/A2.png",
+        "/media/04/content_slots/03_overview/A3.png",
+        "/media/04/content_slots/03_overview/A4.png"
+      ]
+    }
+  ]
+}

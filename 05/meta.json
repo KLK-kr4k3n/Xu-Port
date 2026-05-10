@@ -1,0 +1,27 @@
+{
+  "slug": "assistive-hand-gesture",
+  "type": "project",
+  "title": {
+    "zh": "辅助手设计",
+    "en": "HANDI Assistive Hand Gesture"
+  },
+  "subtitle": {
+    "zh": "医疗情境下面向聋哑患者的关怀交互设计",
+    "en": "A Low-burden Gesture Interaction System for Everyday Semantic Communication"
+  },
+  "category": {
+    "zh": "HCI / 辅助技术 / 信息设计",
+    "en": "HCI / Assistive Technology / Information Design"
+  },
+  "year": "2025",
+  "tools": [
+    "MediaPipe",
+    "HTML",
+    "CSS",
+    "SVG",
+    "Canvas"
+  ],
+  "cover": "/media/05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png",
+  "featured": true,
+  "order": 3
+}

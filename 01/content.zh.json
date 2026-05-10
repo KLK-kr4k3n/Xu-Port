@@ -1,0 +1,60 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png"
+    },
+    {
+      "type": "video",
+      "src": "/media/01/content_slots/02_video_upload/Live_Game_Demo.mp4"
+    },
+    {
+      "type": "intro",
+      "body": "Live_Game 是一个面向医疗公共空间的交互数字媒体项目，试图回应医院候诊、诊疗过渡、公共走廊等场景中常见的紧张、焦虑与无助感。项目并不把医疗空间仅视为“高效管理”的功能场所，而是将其重新理解为一种可以被身体感知、参与和调节的情绪界面。"
+    },
+    {
+      "type": "text",
+      "body": "系统以 Conway’s Game of Life 生命游戏为基础，结合 Processing、OpenCV 与摄像头实时运动检测，将观众的身体移动转译为细胞自动机系统中的扰动因子。人在空间中的经过、停留、摆动和靠近，会影响画面中细胞的生长、扩散、衰减与色彩变化。项目通过“自组织规则 + 身体扰动”的方式，把情绪调节从静态装饰转化为一种可参与的动态过程。"
+    },
+    {
+      "type": "text",
+      "body": "在技术实现上，项目完成了生命游戏细胞更新、摄像头运动差分、情绪色彩映射、动态轨迹残影、扩散速度调节、交互强度反馈等多个模块。系统并不追求强控制或明确任务，而是强调轻量、低压力、环境化的交互体验：观众无需学习复杂操作，只需身体自然经过，空间便会产生柔和回应。"
+    },
+    {
+      "type": "text",
+      "body": "在研究层面，项目引入具身认知与环境心理学视角，讨论身体如何通过感知—行动循环参与情绪调节。它既是一个交互原型，也是一种对公共医疗空间设计逻辑的反思：疗愈不一定来自明确的治疗行为，也可以来自一个允许人被看见、被回应、被缓冲的空间系统。"
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/01/content_slots/03_overview/fi2.png",
+        "/media/01/content_slots/03_overview/fi3.png",
+        "/media/01/content_slots/03_overview/fi4.png",
+        "/media/01/content_slots/03_overview/fi5.png",
+        "/media/01/content_slots/03_overview/fi6.png",
+        "/media/01/content_slots/03_overview/fi7.png",
+        "/media/01/content_slots/03_overview/fi8.png",
+        "/media/01/content_slots/03_overview/fi9.png",
+        "/media/01/content_slots/03_overview/fi10.png",
+        "/media/01/content_slots/03_overview/fi11.png"
+      ]
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/01/content_slots/04_context/24c531ad9abf604fdc7b1fa19e62f676.png",
+        "/media/01/content_slots/04_context/52603aef309003ed86bd487d70557940.png",
+        "/media/01/content_slots/04_context/633486c7d79a427fe1bcbcfe062be47b.jpg",
+        "/media/01/content_slots/04_context/b3f55a804a48dc38485aafd7ab9b2f95.png"
+      ]
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/01/content_slots/05_interaction_flow/1(3).jpg",
+        "/media/01/content_slots/05_interaction_flow/84d4c59ac8f5553264eaabda5c4e9537.png",
+        "/media/01/content_slots/05_interaction_flow/920c110156070c12944f87ee9f4419bf.png"
+      ]
+    }
+  ]
+}

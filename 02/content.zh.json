@@ -1,0 +1,34 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png"
+    },
+    {
+      "type": "video",
+      "src": "/media/02/content_slots/02_video_upload/XinXue_1.mp4"
+    },
+    {
+      "type": "intro",
+      "body": "算法心学是一个将中国心学思想、实时交互系统与生成图像技术结合的数字媒体实验。项目以王阳明心学中的“心即理”“致良知”“知行合一”“私欲遮蔽”“事上磨练”等概念为思想基础，尝试把抽象哲学构念转译为可操作、可感知、可交互的算法系统。"
+    },
+    {
+      "type": "text",
+      "body": "项目的核心机制是“扰动—反馈—回稳”。观众通过身体动作介入系统，打破原本稳定的视觉状态；系统随后通过反馈、延迟、叠加、衰减与回稳机制，将这种扰动转化为持续变化的图像过程。项目早期基于 TouchDesigner 搭建分形、反馈、噪声与亮度场系统，并通过 MediaPipe 捕捉手势开合度，将手部动作映射到视觉参数变化中，使身体成为哲学概念被激活的入口。"
+    },
+    {
+      "type": "text",
+      "body": "在后续技术路径中，项目计划接入 StreamDiffusion，将实时噪声场进一步转译为黑白山、水、林、树等具象图像，作为“从混沌到显现”的视觉过程：噪声、遮蔽、显影、凝结，构成一种关于心性、感知与行动的图像化叙事。"
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/02/content_slots/03_overview/3.jpg",
+        "/media/02/content_slots/03_overview/4.jpg",
+        "/media/02/content_slots/03_overview/5.png",
+        "/media/02/content_slots/03_overview/6.png",
+        "/media/02/content_slots/03_overview/11.jpg"
+      ]
+    }
+  ]
+}

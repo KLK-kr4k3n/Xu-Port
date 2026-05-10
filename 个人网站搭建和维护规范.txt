@@ -1,0 +1,671 @@
+
+---
+
+# 个人作品集网站内容维护架构规划
+
+## Modular Bilingual Portfolio Content System
+
+## 0. 核心目标
+
+网站应被设计为一个 **内容驱动型作品集系统**，而不是一次性写死的静态页面。
+
+后续维护时，用户应该可以通过添加或修改项目文件夹中的内容，完成以下操作：
+
+```txt
+新增项目
+修改项目文字
+替换项目图片
+添加项目模块
+调整项目图文顺序
+增加中英文内容
+更新视频 / GIF / 系统图
+```
+
+而不需要每次重新改网站整体代码。
+
+---
+
+## 1. 基本开发思路
+
+推荐采用：
+
+```txt
+React / Next.js
++
+文件夹式内容管理
++
+MDX / JSON / YAML 数据
++
+动态路由
++
+中英双语 i18n
+```
+
+网站主体只负责：
+
+```txt
+读取内容数据
+识别模块类型
+调用对应组件
+自动生成页面
+```
+
+项目内容则独立存放在 `content/projects/` 中。
+
+也就是说，网站不是手写每个页面，而是根据项目文件夹自动生成项目页。
+
+---
+
+## 2. 推荐项目文件夹结构
+
+整体结构可以设计成这样：
+
+```txt
+portfolio-site/
+├── app/
+│   ├── page.tsx
+│   ├── projects/
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   └── layout.tsx
+│
+├── components/
+│   ├── Sidebar.tsx
+│   ├── ProjectHeader.tsx
+│   ├── TextBlock.tsx
+│   ├── ImageBlock.tsx
+│   ├── ImageRow.tsx
+│   ├── DiagramBlock.tsx
+│   ├── VideoBlock.tsx
+│   ├── MetaBlock.tsx
+│   └── ModuleRenderer.tsx
+│
+├── content/
+│   └── projects/
+│       ├── live-game/
+│       │   ├── meta.json
+│       │   ├── zh.mdx
+│       │   ├── en.mdx
+│       │   └── media/
+│       │       ├── cover.jpg
+│       │       ├── system-diagram.svg
+│       │       ├── process-01.png
+│       │       ├── process-02.png
+│       │       └── demo.mp4
+│       │
+│       ├── algorithmic-xinxue/
+│       │   ├── meta.json
+│       │   ├── zh.mdx
+│       │   ├── en.mdx
+│       │   └── media/
+│       │
+│       ├── topological-regime-forceflow/
+│       │   ├── meta.json
+│       │   ├── zh.mdx
+│       │   ├── en.mdx
+│       │   └── media/
+│       │
+│       └── assistive-hand-gesture/
+│           ├── meta.json
+│           ├── zh.mdx
+│           ├── en.mdx
+│           └── media/
+│
+├── lib/
+│   ├── getProjects.ts
+│   ├── getProjectBySlug.ts
+│   └── i18n.ts
+│
+└── public/
+```
+
+这个结构的好处是非常直观：
+**一个项目 = 一个文件夹。**
+项目文字、项目图片、系统图、视频、封面全部放在一起。
+
+后续加项目，只需要复制一个文件夹模板。
+
+---
+
+## 3. 单个项目内部结构
+
+以 `live-game` 为例：
+
+```txt
+live-game/
+├── meta.json
+├── zh.mdx
+├── en.mdx
+└── media/
+    ├── cover.jpg
+    ├── system-diagram.svg
+    ├── interaction-flow.svg
+    ├── keyframe-01.png
+    ├── keyframe-02.png
+    ├── keyframe-03.png
+    └── demo.mp4
+```
+
+### `meta.json`
+
+负责项目基础信息：
+
+```json
+{
+  "slug": "live-game",
+  "title": {
+    "zh": "Live_Game",
+    "en": "Live_Game"
+  },
+  "subtitle": {
+    "zh": "基于生命游戏的医疗公共空间情绪疗愈交互系统",
+    "en": "An Embodied Emotional Regulation System for Medical Public Spaces"
+  },
+  "category": {
+    "zh": "交互设计 / HCI / 数字媒体艺术",
+    "en": "Interaction Design / HCI / Digital Media Art"
+  },
+  "year": "2025",
+  "tools": ["Processing", "OpenCV", "Camera Interaction", "Cellular Automata"],
+  "cover": "./media/cover.jpg",
+  "featured": true,
+  "order": 1
+}
+```
+
+`meta.json` 控制首页项目卡片、侧边栏项目列表、项目标签、排序和封面。
+
+---
+
+## 4. 中英双语内容管理
+
+每个项目单独保留两个正文文件：
+
+```txt
+zh.mdx
+en.mdx
+```
+
+中文内容放在 `zh.mdx`，英文内容放在 `en.mdx`。
+
+例如：
+
+```txt
+live-game/
+├── zh.mdx
+└── en.mdx
+```
+
+网站根据当前语言自动读取对应文件。
+
+```txt
+/project/live-game?lang=zh
+/project/live-game?lang=en
+```
+
+或者采用路径形式：
+
+```txt
+/zh/projects/live-game
+/en/projects/live-game
+```
+
+我更推荐第二种：
+
+```txt
+/zh/projects/live-game
+/en/projects/live-game
+```
+
+更清晰，也更适合后续申请、分享和 SEO。
+
+---
+
+## 5. 模块化内容写法
+
+每个项目正文不应该是一整篇死文章，而应该由多个模块组成。
+
+例如 `zh.mdx` 可以这样写：
+
+```mdx
+<ProjectIntro>
+Live_Game 是一个面向医疗公共空间的交互数字媒体项目，试图回应医院候诊、诊疗过渡、公共走廊等场景中常见的紧张、焦虑与无助感。
+</ProjectIntro>
+
+<ImageBlock
+  src="./media/cover.jpg"
+  caption="系统在医疗公共空间中的视觉状态模拟"
+/>
+
+<TextSection title="研究背景">
+医疗公共空间往往具有高密度、强不确定性和高情绪压力。项目将其重新理解为一种可以被身体感知、参与和调节的情绪界面。
+</TextSection>
+
+<DiagramBlock
+  src="./media/system-diagram.svg"
+  title="交互系统流程"
+  caption="身体运动被摄像头捕捉后，转译为生命游戏系统中的扰动因子。"
+/>
+
+<ImageRow
+  images={[
+    "./media/keyframe-01.png",
+    "./media/keyframe-02.png",
+    "./media/keyframe-03.png"
+  ]}
+  caption="不同身体运动强度下的视觉反馈状态"
+/>
+
+<TextSection title="项目价值">
+项目通过自组织规则与身体扰动之间的关系，探索公共医疗空间中低压力、环境化、可参与的情绪调节机制。
+</TextSection>
+```
+
+这种方式的优点是：
+内容仍然像文档一样好改，但页面可以自动调用对应组件。
+
+---
+
+## 6. 更稳定的 JSON 模块方案
+
+如果希望 Codex 更容易维护，也可以不用 MDX，而是采用 JSON 模块数组。
+
+例如：
+
+```json
+{
+  "modules": [
+    {
+      "type": "intro",
+      "body": "Live_Game 是一个面向医疗公共空间的交互数字媒体项目..."
+    },
+    {
+      "type": "image",
+      "src": "./media/cover.jpg",
+      "caption": "系统在医疗公共空间中的视觉状态模拟"
+    },
+    {
+      "type": "text",
+      "title": "研究背景",
+      "body": "医疗公共空间往往具有高密度、强不确定性和高情绪压力..."
+    },
+    {
+      "type": "diagram",
+      "src": "./media/system-diagram.svg",
+      "title": "交互系统流程",
+      "caption": "身体运动被摄像头捕捉后，转译为生命游戏系统中的扰动因子。"
+    },
+    {
+      "type": "imageRow",
+      "images": [
+        "./media/keyframe-01.png",
+        "./media/keyframe-02.png",
+        "./media/keyframe-03.png"
+      ],
+      "caption": "不同身体运动强度下的视觉反馈状态"
+    }
+  ]
+}
+```
+
+这个方案更适合“内容模块化调用”。
+
+网站只需要写一个 `ModuleRenderer`：
+
+```txt
+如果 type = text → 调用 TextSection
+如果 type = image → 调用 ImageBlock
+如果 type = imageRow → 调用 ImageRow
+如果 type = diagram → 调用 DiagramBlock
+如果 type = video → 调用 VideoBlock
+如果 type = meta → 调用 MetaBlock
+```
+
+这样后续新增模块不需要改页面结构。
+
+---
+
+## 7. 推荐内容文件结构：最终版
+
+我建议每个项目采用这个结构：
+
+```txt
+project-name/
+├── meta.json
+├── content.zh.json
+├── content.en.json
+└── media/
+    ├── cover.jpg
+    ├── diagram-system.svg
+    ├── diagram-process.svg
+    ├── image-01.png
+    ├── image-02.png
+    ├── image-03.png
+    └── video-demo.mp4
+```
+
+也就是说：
+
+```txt
+meta.json：项目基础信息
+content.zh.json：中文项目正文模块
+content.en.json：英文项目正文模块
+media：本项目所有媒体素材
+```
+
+这个比 MDX 更适合你说的“动态调用式维护”。
+结构清楚，Codex 也不容易乱发挥。
+
+---
+
+## 8. 模块类型建议
+
+项目页可以支持这些模块：
+
+```txt
+intro
+text
+image
+imageRow
+imageGrid
+diagram
+video
+quote
+meta
+process
+table
+comparison
+reflection
+```
+
+对应关系如下：
+
+```txt
+intro       项目摘要
+text        普通文字段落
+image       单张大图
+imageRow    横向图像序列
+imageGrid   多图矩阵
+diagram     系统图 / 流程图 / 框架图
+video       视频或 GIF 演示
+quote       核心观点 / 概念句
+meta        项目信息卡片
+process     阶段流程
+table       参数表 / 对照表
+comparison  前后对比 / 方案对比
+reflection  项目反思
+```
+
+这套模块足够覆盖你的项目。
+
+---
+
+## 9. 图像上传与维护逻辑
+
+如果是最小可行版本：
+
+```txt
+手动把图片放入对应项目的 media 文件夹
+然后在 content.zh.json / content.en.json 中引用图片路径
+```
+
+例如：
+
+```json
+{
+  "type": "image",
+  "src": "./media/interaction-01.png",
+  "caption": "用户通过身体移动触发细胞自动机视觉反馈。"
+}
+```
+
+如果后续希望真的在网页后台上传图片，就需要额外做：
+
+```txt
+后台管理界面
+文件上传接口
+数据库或 CMS
+图片存储服务
+```
+
+这会明显复杂很多。
+
+所以我建议分两阶段：
+
+### 阶段 1：文件夹式内容管理
+
+适合现在快速搭建作品集。
+
+```txt
+本地维护
+文件结构清楚
+Codex 容易生成
+部署简单
+无需后台
+```
+
+### 阶段 2：CMS 管理
+
+未来需要后台时再引入：
+
+```txt
+Sanity
+Strapi
+Payload CMS
+Decap CMS
+Notion API
+Airtable
+```
+
+现在不要一开始就做 CMS，容易把时间烧没。我们现在目标是快速、稳定、可扩展，不是造一个内容管理帝国。先别开局修罗难度。
+
+---
+
+## 10. 首页项目列表动态生成
+
+首页不应该手写项目卡片，而应该读取所有项目的 `meta.json` 自动生成。
+
+例如：
+
+```txt
+读取 content/projects/*
+按 order 排序
+过滤 featured = true 的项目
+生成 ProjectCard
+```
+
+这样新增项目时，只要设置：
+
+```json
+{
+  "featured": true,
+  "order": 3
+}
+```
+
+首页就会自动出现该项目。
+
+---
+
+## 11. 侧边栏项目导航动态生成
+
+左侧 Sidebar 也不应该手写。
+
+它应该读取项目列表自动生成：
+
+```txt
+Live_Game
+Algorithmic Xinxue
+Topological Regime / ForceFlow
+Assistive Hand Gesture
+Pocket AI Fitness Coach
+```
+
+当前项目根据 `slug` 自动高亮。
+
+这和你参考的 HCI 设计师网站逻辑一致：左侧是固定研究目录，右侧是项目正文。
+但我们的内容维护方式要更系统，适合长期扩展。
+
+---
+
+## 12. 中英切换逻辑
+
+网站顶部或侧边栏可以有语言切换：
+
+```txt
+中文 / EN
+```
+
+当前页面为：
+
+```txt
+/zh/projects/live-game
+```
+
+点击 EN 后跳转：
+
+```txt
+/en/projects/live-game
+```
+
+如果英文内容暂时不存在，可以 fallback 到中文，或者显示：
+
+```txt
+English version coming soon.
+```
+
+推荐逻辑：
+
+```txt
+优先读取当前语言内容
+如果没有，则读取默认中文内容
+如果两个都没有，则隐藏该项目
+```
+
+---
+
+## 13. Codex 开发指令重点
+
+后续给 Codex 时，要明确：
+
+```txt
+不要为每个项目单独写死页面。
+不要把项目内容写在 React 组件里。
+不要通过复制 ProjectPage 组件来新增项目。
+所有项目内容必须从 content/projects/[slug] 文件夹中读取。
+每个项目必须包含 meta.json、content.zh.json、content.en.json 和 media 文件夹。
+项目页面由 ModuleRenderer 根据 content 文件中的模块 type 自动渲染。
+```
+
+这一段必须写死。
+否则 Codex 很可能图省事，直接把项目内容写进页面组件。那后面维护就寄了。
+
+---
+
+## 14. 推荐技术架构
+
+目前最稳的是：
+
+```txt
+Next.js
+TypeScript
+React
+CSS Modules 或 Tailwind
+本地 JSON 内容系统
+动态路由
+next-intl 或自定义 i18n
+```
+
+推荐原因：
+
+```txt
+适合个人网站
+适合动态路由
+适合项目数据读取
+适合中英双语
+适合后续部署到 Vercel
+适合继续扩展 CMS
+```
+
+但如果你想更轻，也可以用：
+
+```txt
+Vite + React
+```
+
+不过 Next.js 对中英双语和项目页动态生成更顺手。
+
+---
+
+## 15. 最终内容系统关系
+
+可以理解为：
+
+```txt
+Project Folder
+    ↓
+meta.json
+    ↓
+首页卡片 / 侧边栏 / 项目基础信息
+
+content.zh.json
+    ↓
+中文项目详情页
+
+content.en.json
+    ↓
+英文项目详情页
+
+media/
+    ↓
+项目图片 / 视频 / 系统图 / 过程图
+
+ModuleRenderer
+    ↓
+自动渲染为网页模块
+```
+
+这就是我们要的“动态调用”。
+
+---
+
+## 16. 给 Codex 的开发模板说明
+
+后续可以这样写给 Codex：
+
+```txt
+请开发一个内容驱动型个人作品集网站。
+
+要求：
+1. 不要将项目内容写死在 React 页面中。
+2. 每个项目必须作为一个独立文件夹存放在 content/projects/[slug] 中。
+3. 每个项目文件夹必须包含 meta.json、content.zh.json、content.en.json 和 media 文件夹。
+4. 网站需要自动读取所有项目 meta.json，生成首页项目卡片和左侧项目导航。
+5. 项目详情页通过动态路由 /[locale]/projects/[slug] 生成。
+6. 页面根据 locale 自动读取 content.zh.json 或 content.en.json。
+7. 项目正文由模块数组组成，每个模块包含 type 字段。
+8. 使用 ModuleRenderer 根据 type 调用对应组件。
+9. 支持 text、intro、image、imageRow、imageGrid、diagram、video、quote、table、reflection 等模块。
+10. 图片、视频、系统图均从项目自身 media 文件夹中引用。
+11. 新增项目时，只需要添加新的项目文件夹，不需要修改页面代码。
+12. 语言切换时应保持当前项目 slug 不变，仅切换 locale。
+13. 如果某语言内容缺失，应 fallback 到中文或显示 coming soon。
+```
+
+---
+
+## 17. 结论
+
+你的想法非常对。
+我们要做的不是一个“漂亮但脆弱”的作品集网站，而是一个 **可长期维护的研究作品档案系统**。
+
+最理想的状态是：
+
+```txt
+一个项目一个文件夹
+一个模块一段数据
+一组图片归属一个项目
+中文英文并行维护
+网站自动读取并渲染
+```
+

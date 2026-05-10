@@ -1,0 +1,10 @@
+{
+  "slug": "cv",
+  "type": "cv",
+  "name": "Xu",
+  "role": {
+    "zh": "徐铭亨",
+    "en": "Mingheng Xu"
+  },
+  "order": 0
+}

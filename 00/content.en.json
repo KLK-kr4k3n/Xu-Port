@@ -1,0 +1,37 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/00/d7dbdfad42631df10aef8172071a8607.png"
+    },
+    {
+      "type": "intro",
+      "body": "Mingheng Xu\n\n1296830059@qq.com"
+    },
+    {
+      "type": "text",
+      "title": "Education",
+      "body": "Wuhan University\nSchool of Urban Design\nDepartment of Design\nProduct Design\n2024-2028"
+    },
+    {
+      "type": "text",
+      "title": "Awards",
+      "body": "#Wuhan University First-Class Scholarship / Special Scholarship 2025\n#Award 360° Annual Digital Media Design Shortlist 2025\n#Kan Tai-Keung Design Award, Student Category, Excellence Award 2025"
+    },
+    {
+      "type": "text",
+      "title": "Experience",
+      "body": "WHU Student Union - LuoJia Studio Lead 2024.9 -\nCAA D&A Lab Member 2026.4 -"
+    },
+    {
+      "type": "text",
+      "title": "Tools",
+      "body": "Adobe\nFigma\nRhino/Grasshopper\nBlender\nProcessing\ntouchDesigner\nUE\nUnity"
+    },
+    {
+      "type": "text",
+      "title": "Fields",
+      "body": "#User Experience Design\n#HCI Design / Art\n#Visual Design\n#Speculative Design\n#Graphic and Motion Design\n#XR Design"
+    }
+  ]
+}

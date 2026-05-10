@@ -1,0 +1,25 @@
+{
+  "slug": "pocket-ai-fitness-coach",
+  "type": "project",
+  "title": {
+    "zh": "知动",
+    "en": "kinetic"
+  },
+  "subtitle": {
+    "zh": "运动科技产品的材料、色彩与交互硬件语言研究",
+    "en": "A CMF and Interaction Hardware Study for a Sports Technology Product"
+  },
+  "category": {
+    "zh": "工业设计 / CMF / 智能硬件",
+    "en": "Industrial Design / CMF / Smart Hardware"
+  },
+  "year": "2025",
+  "tools": [
+    "CMF Research",
+    "Product Design",
+    "Ergonomics"
+  ],
+  "cover": "/media/04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png",
+  "featured": true,
+  "order": 2
+}

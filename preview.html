@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xu Portfolio Preview</title>
+    <style>
+      :root {
+        --bg: #fff;
+        --ink: #151515;
+        --muted: #666;
+        --soft: #ddd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        min-height: 100%;
+      }
+
+      a,
+      a:visited {
+        color: var(--ink);
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .shell {
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      aside {
+        border-right: 1px solid var(--soft);
+        height: 100vh;
+        padding: 28px 22px;
+        position: sticky;
+        top: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      .identity h1 {
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+
+      .identity p {
+        color: var(--muted);
+        font-size: 18px;
+        margin-bottom: 36px;
+      }
+
+      .navButton {
+        align-items: center;
+        background: transparent;
+        border: 1px solid var(--ink);
+        color: var(--ink);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 18px;
+        gap: 8px;
+        margin-bottom: 30px;
+        padding: 10px 20px;
+        text-decoration: none;
+      }
+
+      .navButton.active {
+        background: var(--ink);
+        color: var(--bg);
+      }
+
+      .projectNav {
+        display: none;
+        gap: 20px;
+        grid-auto-rows: 30px;
+        list-style: none;
+        margin: 10px 0 0;
+        max-width: 270px;
+        overflow: hidden;
+        padding: 0 0 0 6px;
+        width: 270px;
+      }
+
+      .projectNav.open {
+        display: grid;
+      }
+
+      .projectNav li {
+        align-items: baseline;
+        display: flex;
+        height: 30px;
+        min-width: 0;
+        overflow: hidden;
+        width: 270px;
+      }
+
+      .projectNav li::before {
+        color: var(--ink);
+        content: "●";
+        flex: 0 0 14px;
+        font-size: 9px;
+        margin-right: 8px;
+        text-align: center;
+        vertical-align: 0.1em;
+      }
+
+      .projectNav a {
+        color: var(--ink);
+        display: inline-block;
+        flex: 0 0 244px;
+        font-size: 18px;
+        font-style: italic;
+        height: 28px;
+        line-height: 24px;
+        max-width: 244px;
+        min-width: 0;
+        overflow: hidden;
+        padding: 2px 5px;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-overflow: clip;
+        white-space: nowrap;
+      }
+
+      .projectNav a.active {
+        background: var(--ink);
+        color: var(--bg);
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      .langSwitch {
+        bottom: 24px;
+        display: flex;
+        gap: 10px;
+        position: absolute;
+      }
+
+      .langSwitch button {
+        background: transparent;
+        border: 0;
+        color: var(--muted);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .langSwitch button.active {
+        color: var(--ink);
+        text-decoration: underline;
+      }
+
+      main {
+        padding: 44px clamp(28px, 6vw, 88px);
+      }
+
+      .section {
+        margin: 0 auto;
+        max-width: 920px;
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+      }
+
+      .pageTitle {
+        font-size: clamp(36px, 6vw, 72px);
+        font-weight: 400;
+        line-height: 1;
+        margin: 0 0 18px;
+      }
+
+      .projectHeader {
+        align-items: flex-start;
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+      }
+
+      .projectHeader .pageTitle {
+        margin-right: 24px;
+      }
+
+      .projectAward {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.35;
+        margin: 10px 0 0;
+        max-width: 320px;
+        text-align: right;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 20px;
+        line-height: 1.5;
+        margin-bottom: 38px;
+        max-width: 760px;
+      }
+
+      .module {
+        border-top: 1px solid var(--soft);
+        padding: 28px 0;
+      }
+
+      .module h2 {
+        font-size: 24px;
+        font-weight: 400;
+        margin: 0 0 14px;
+      }
+
+      .module p {
+        font-size: 18px;
+        line-height: 1.75;
+        margin: 0;
+        white-space: pre-line;
+      }
+
+      .mediaAsset {
+        border: 1px solid var(--ink);
+        display: block;
+        height: auto;
+        max-width: none;
+        width: 100%;
+      }
+
+      .mediaGrid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+      }
+
+      .cvLayout {
+        display: grid;
+        gap: clamp(22px, 3vw, 54px);
+        grid-template-columns: minmax(140px, 0.85fr) minmax(150px, 0.8fr) minmax(330px, 1.25fr);
+        margin: 0 0 0 auto;
+        max-width: 1240px;
+        min-height: calc(100vh - 88px);
+        padding: 8px 0 36px;
+      }
+
+      .cvColumn {
+        min-height: calc(100vh - 132px);
+        min-width: 0;
+      }
+
+      .cvColumnFields {
+        align-items: flex-end;
+        display: flex;
+        padding-bottom: 7vh;
+      }
+
+      .cvColumnTools {
+        align-items: flex-start;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 2vh;
+      }
+
+      .cvColumnProfile {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .cvIntro {
+        margin-left: 0;
+        max-width: 360px;
+        width: 360px;
+      }
+
+      .cvPhoto {
+        display: block;
+        height: auto;
+        margin-bottom: 26px;
+        margin-left: auto;
+        max-width: 250px;
+        width: min(100%, 250px);
+      }
+
+      .cvName {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.15;
+        margin: 0 0 24px;
+        text-align: right;
+      }
+
+      .cvEducation,
+      .cvEmail,
+      .cvLocation {
+        font-size: 16px;
+        line-height: 1.22;
+        margin: 0;
+        white-space: pre-line;
+      }
+
+      .cvLocation {
+        margin-bottom: 8px;
+        text-align: right;
+      }
+
+      .cvEmail {
+        margin-bottom: 30px;
+        margin-top: 0;
+        text-align: right;
+      }
+
+      .cvLower {
+        margin-left: 0;
+        margin-top: 64px;
+        max-width: 360px;
+        width: 360px;
+      }
+
+      .cvExperience {
+        margin-bottom: 34px;
+      }
+
+      .cvExperienceItem {
+        display: block;
+        font-size: 16px;
+        line-height: 1.22;
+        margin: 0 0 18px;
+      }
+
+      .cvExperienceItem span:first-child {
+        display: block;
+        min-width: 0;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .cvExperienceItem span:last-child {
+        display: block;
+        margin-top: 2px;
+        text-align: right;
+      }
+
+      .cvAward {
+        font-size: 18px;
+        line-height: 1.25;
+        margin: 0 0 20px;
+      }
+
+      .cvTools {
+        font-size: 18px;
+        line-height: 1.28;
+        margin: 0;
+        max-width: 100%;
+        text-align: right;
+      }
+
+      .cvTools p {
+        margin: 0;
+      }
+
+      .cvFields {
+        font-size: 18px;
+        line-height: 1.28;
+        margin: 0;
+      }
+
+      .cvFields p {
+        margin: 0 0 28px;
+      }
+
+      .projectListSection {
+        max-width: 1180px;
+      }
+
+      .projectPreviewList {
+        display: grid;
+        gap: 36px;
+        margin-top: 34px;
+      }
+
+      .projectPreview {
+        aspect-ratio: 16 / 5.6;
+        background: var(--bg);
+        border: 1px solid var(--ink);
+        display: block;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .projectPreview img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+
+      .projectPreview:hover,
+      .projectPreview:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: -2px;
+      }
+
+      @media (max-width: 820px) {
+        .shell {
+          display: block;
+        }
+
+        aside {
+          height: auto;
+          position: relative;
+        }
+
+        .langSwitch {
+          margin-top: 28px;
+          position: static;
+        }
+
+        main {
+          padding: 32px 22px;
+        }
+
+        .projectHeader {
+          display: block;
+        }
+
+        .projectHeader .pageTitle {
+          margin-right: 0;
+        }
+
+        .projectAward {
+          margin: 0 0 18px;
+          max-width: none;
+          text-align: left;
+        }
+
+        .cvLayout {
+          display: block;
+          min-height: auto;
+          padding-top: 0;
+        }
+
+        .cvColumn {
+          min-height: auto;
+        }
+
+        .cvIntro,
+        .cvLower,
+        .cvFields {
+          margin-left: 0;
+        }
+
+        .cvTools {
+          margin-top: 90px;
+          text-align: left;
+        }
+
+        .cvFields {
+          margin-top: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside>
+        <div class="identity">
+          <h1>Xu</h1>
+        </div>
+        <button class="navButton" id="cvButton" type="button"><span>→</span><span>CV</span></button>
+        <br />
+        <button class="navButton" id="projectsButton" type="button"><span>↓</span><span>Projects</span></button>
+        <ul class="projectNav" id="projectNav"></ul>
+        <div class="langSwitch">
+          <button class="active" id="zhButton" type="button">中文</button>
+          <span>/</span>
+          <button id="enButton" type="button">EN</button>
+        </div>
+      </aside>
+      <main id="main"></main>
+    </div>
+
+    <script>
+      const content = {
+              "zh": {
+                      "cv": {
+                              "role": "徐铭亨",
+                              "photo": "00/media/d7dbdfad42631df10aef8172071a8607.png",
+                              "name": "徐铭亨",
+                              "email": "1296830059@qq.com",
+                              "education": [
+                                      "武汉大学",
+                                      "城市设计学院",
+                                      "设计系",
+                                      "产品设计",
+                                      "2024-2028"
+                              ],
+                              "awards": [
+                                      "#武汉大学甲等奖学金/专项奖学金 2025",
+                                      "#Award 360° 年度数字媒体设计入围 2025",
+                                      "＃靳埭强设计奖 学生组 优秀奖 2025"
+                              ],
+                              "experience": [
+                                      "武汉大学学生会-珞珈创意设计工作室负责人2024.9 -",
+                                      "中国美术学院人工智能艺术创新实验室成员 2026.4 -"
+                              ],
+                              "tools": [
+                                      "Adobe",
+                                      "Figma",
+                                      "Rhino/Grasshopper",
+                                      "Blender",
+                                      "Processing",
+                                      "touchDesigner",
+                                      "UE",
+                                      "Unity"
+                              ],
+                              "fields": [
+                                      "#用户体验设计",
+                                      "#人机交互设计/艺术",
+                                      "#视觉设计",
+                                      "#设计思辨",
+                                      "#图形与动态设计",
+                                      "#XR设计"
+                              ]
+                      },
+                      "projects": [
+                              {
+                                      "slug": "topological-regime-forceflow",
+                                      "title": "拓扑制度",
+                                      "subtitle": "行星尺度与身体叙事",
+                                      "category": "前沿设计 / 参数化生成 / XR",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "03/content_slots/01_cover/67962edbeb7be741c3b39b230d0bab08.png"
+                                              },
+                                              "当世界的物理规则改变之后，人类的身体、工具和社会还会以现在的方式存在吗？\n\n《拓扑制度》是一项结合参数化形态生成、人体动力学、设计虚构与 XR 沉浸体验的实验设计研究。项目从一个反事实问题出发：如果人类并非生活在地球当前的重力、大气、地貌与气候条件中，身体的运动方式、骨骼结构、身体系统会如何被重新塑造？\n\n项目将“行星条件”视为身体与结构形态的生成前提。不同星球的重力强度、大气密度、地表摩擦、岩层结构、风暴频率、光照环境与地貌尺度，会改变个体移动、攀爬、负重、避险、协作和建造的方式。长期来看，这些环境压力不仅会影响身体姿态与运动机制，也会进一步改变穿戴装置、辅助结构、建筑系统与社会组织方式。项目因此提出“拓扑制度”这一概念：制度在法律、规则或社会秩序之外也可以被理解为身体、环境、技术与空间关系共同生成的拓扑结构。\n\n项目尝试以工程流程中成熟的拓扑优化技术作为核心生成逻辑。在本设计中，形态生成被重新定义为一种连接人体、任务、环境与结构的耦合流。项目的基本方法论是“图形 → 形态 → 状态”：首先在图形层中，将人体姿态、运动路径、受力方向、地形条件、任务需求和环境限制转化为可视化的场、向量或图结构；随后在形态层中，通过流线追踪、骨架生成、晶格填充、拓扑生长等方式生成结构候选；最后在状态层中，通过制造约束与环境适应性进行评估和反馈，形成闭环设计过程。\n\n项目正在推进到 Grasshopper / GH Python 原型开发阶段，涉及场构建、IDW 插值、曲面流线追踪、种子点控制、骨架生成、基础评估报告与制造约束检查等模块。后续将继续发展三维力流晶格化、复杂曲面稳定性优化等。\n\n在视觉与体验层面，《拓扑制度》基于 Unreal Engine 构建沉浸式星球环境，探索程序化地形生成、巨尺度自然地貌、特殊气象系统、第一人称/第三人称身体骨架可视化与 XR 体验。项目希望让观众感知到一种清晰的因果链：行星条件如何改变地貌，地貌如何改变身体运动，身体运动如何生成新的结构形态，最终如何塑造一种新的生存制度。",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "03/content_slots/03_overview/1.png",
+                                                              "03/content_slots/03_overview/2.png",
+                                                              "03/content_slots/03_overview/P8.png",
+                                                              "03/content_slots/03_overview/P9.png",
+                                                              "03/content_slots/03_overview/P10P11.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "03/content_slots/01_cover/67962edbeb7be741c3b39b230d0bab08.png"
+                              },
+                              {
+                                      "slug": "pocket-ai-fitness-coach",
+                                      "title": "知动",
+                                      "subtitle": "运动科技产品的材料、色彩与交互硬件语言研究",
+                                      "category": "工业设计 / CMF / 智能硬件",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "04/content_slots/02_video_upload/kine.mp4"
+                                              },
+                                              "校企合作项目，围绕企业提供的具体产品概念进行设计：一款口袋式 AI 健身教练产品，重点研究智能硬件在运动场景中的 CMF 语言、结构逻辑、使用流程与产品生态。产品由一个带摄像头的便携主机与耳机反馈装置组成，可通过蓝牙连接手机、平板或电视，在训练过程中提供动作识别、状态反馈、训练记录与多屏协同体验。\n\n在产品定义上，项目关注“轻量携带 + 视觉识别 + 运动陪伴”的复合需求。主机需要适合手持、口袋收纳与桌面摆放，同时具备摄像头朝向、屏幕可读性、按键操作与远距离状态识别等功能条件。\n\n在 CMF 研究上，项目参考了高饱和运动品牌语言、半透明科技产品、凝胶感材料、微肋纹表面、喷涂工艺、磨砂塑料、透明壳体与内部结构可视化等方向，试图形成一种介于运动、科技与未来感之间的产品气质。尤其是半透明与不透明材质的对比，使产品可以同时表达“专业设备感”和“轻量消费电子感”。\n\n该项目将产品使用流程、硬件结构、材料工艺、人体尺度与品牌视觉气质融合进工业产品设计流程中，并引入个人风格化概念表达。",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "04/content_slots/03_overview/A.png",
+                                                              "04/content_slots/03_overview/A0.png",
+                                                              "04/content_slots/03_overview/A1.png",
+                                                              "04/content_slots/03_overview/A2.png",
+                                                              "04/content_slots/03_overview/A3.png",
+                                                              "04/content_slots/03_overview/A4.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+                              },
+                              {
+                                      "slug": "assistive-hand-gesture",
+                                      "title": "辅助手设计",
+                                      "subtitle": "医疗情境下面向聋哑患者的关怀交互设计",
+                                      "category": "HCI / 辅助技术 / 信息设计",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png"
+                                              },
+                                              "本项目是一项面向医疗场景中聋 / 听障及言语障碍患者的手语交互服务设计，重点关注患者在理疗、检查、康复训练以及清醒手术等过程中，由于听觉信息缺失或语言表达受限而产生的沟通障碍。将其放入具体医疗服务流程中，思考患者、医生、护士、理疗师与设备界面之间如何建立一种更稳定、更低负担、更可确认的沟通机制。\n\n在理疗和清醒医疗过程中，患者往往需要持续回应医护人员的指令，例如是否疼痛、是否需要暂停、是否感到麻木、是否可以继续、呼吸节奏是否稳定、某个动作是否完成等。对于聋 / 听障患者而言，这些反馈如果完全依赖纸笔、家属转述或临时手势，很容易造成延迟、误解和情绪压力。项目因此聚焦一组高频、关键、低歧义的医疗沟通语义，而不是试图一次性完成复杂手语词汇的全面翻译。\n\n该项目的价值在于，它将手语交互从日常交流辅助推进到更加具体的医疗服务流程中：为特殊患者提供在治疗过程中拥有持续表达、反馈和确认自身状态的渠道。项目最终希望探索一种更安全、更可感知、更具尊严的医疗沟通方式。",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "05/content_slots/03_overview/P2.png",
+                                                              "05/content_slots/03_overview/P3.png",
+                                                              "05/content_slots/03_overview/P4.png",
+                                                              "05/content_slots/03_overview/P5.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png"
+                              },
+                              {
+                                      "slug": "live-game",
+                                      "title": "Live_Game",
+                                      "subtitle": "基于生命游戏的医疗公共空间情绪疗愈交互系统",
+                                      "category": "交互设计 / HCI / 数字媒体艺术",
+                                      "year": "2025",
+                                      "cover": "01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png",
+                                      "award": "Award 360° 年度数字媒体设计入围 2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "01/content_slots/02_video_upload/Live_Game_Demo.mp4"
+                                              },
+                                              "Live_Game 是一个面向医疗公共空间的交互数字媒体项目，试图回应医院候诊、诊疗过渡、公共走廊等场景中常见的紧张、焦虑与无助感。项目并不把医疗空间仅视为“高效管理”的功能场所，而是将其重新理解为一种可以被身体感知、参与和调节的情绪界面。",
+                                              "系统以 Conway’s Game of Life 生命游戏为基础，结合 Processing、OpenCV 与摄像头实时运动检测，将观众的身体移动转译为细胞自动机系统中的扰动因子。人在空间中的经过、停留、摆动和靠近，会影响画面中细胞的生长、扩散、衰减与色彩变化。项目通过“自组织规则 + 身体扰动”的方式，把情绪调节从静态装饰转化为一种可参与的动态过程。",
+                                              "在技术实现上，项目完成了生命游戏细胞更新、摄像头运动差分、情绪色彩映射、动态轨迹残影、扩散速度调节、交互强度反馈等多个模块。系统并不追求强控制或明确任务，而是强调轻量、低压力、环境化的交互体验：观众无需学习复杂操作，只需身体自然经过，空间便会产生柔和回应。",
+                                              "在研究层面，项目引入具身认知与环境心理学视角，讨论身体如何通过感知—行动循环参与情绪调节。它既是一个交互原型，也是一种对公共医疗空间设计逻辑的反思：疗愈不一定来自明确的治疗行为，也可以来自一个允许人被看见、被回应、被缓冲的空间系统。",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/03_overview/fi2.png",
+                                                              "01/content_slots/03_overview/fi3.png",
+                                                              "01/content_slots/03_overview/fi4.png",
+                                                              "01/content_slots/03_overview/fi5.png",
+                                                              "01/content_slots/03_overview/fi6.png",
+                                                              "01/content_slots/03_overview/fi7.png",
+                                                              "01/content_slots/03_overview/fi8.png",
+                                                              "01/content_slots/03_overview/fi9.png",
+                                                              "01/content_slots/03_overview/fi10.png",
+                                                              "01/content_slots/03_overview/fi11.png"
+                                                      ]
+                                              },
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/04_context/24c531ad9abf604fdc7b1fa19e62f676.png",
+                                                              "01/content_slots/04_context/52603aef309003ed86bd487d70557940.png",
+                                                              "01/content_slots/04_context/633486c7d79a427fe1bcbcfe062be47b.jpg",
+                                                              "01/content_slots/04_context/b3f55a804a48dc38485aafd7ab9b2f95.png"
+                                                      ]
+                                              },
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/05_interaction_flow/1(3).jpg",
+                                                              "01/content_slots/05_interaction_flow/84d4c59ac8f5553264eaabda5c4e9537.png",
+                                                              "01/content_slots/05_interaction_flow/920c110156070c12944f87ee9f4419bf.png"
+                                                      ]
+                                              }
+                                      ]
+                              },
+                              {
+                                      "slug": "algorithmic-xinxue",
+                                      "title": "算法心学",
+                                      "subtitle": "从具身扰动到实时生成图像的哲学交互实验",
+                                      "category": "交互艺术 / 生成图像 / 哲学媒介",
+                                      "year": "2025",
+                                      "cover": "02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "02/content_slots/02_video_upload/XinXue_1.mp4"
+                                              },
+                                              "算法心学是一个将中国心学思想、实时交互系统与生成图像技术结合的数字媒体实验。项目以王阳明心学中的“心即理”“致良知”“知行合一”“私欲遮蔽”“事上磨练”等概念为思想基础，尝试把抽象哲学构念转译为可操作、可感知、可交互的算法系统。",
+                                              "项目的核心机制是“扰动—反馈—回稳”。观众通过身体动作介入系统，打破原本稳定的视觉状态；系统随后通过反馈、延迟、叠加、衰减与回稳机制，将这种扰动转化为持续变化的图像过程。项目早期基于 TouchDesigner 搭建分形、反馈、噪声与亮度场系统，并通过 MediaPipe 捕捉手势开合度，将手部动作映射到视觉参数变化中，使身体成为哲学概念被激活的入口。",
+                                              "在后续技术路径中，项目计划接入 StreamDiffusion，将实时噪声场进一步转译为黑白山、水、林、树等具象图像，作为“从混沌到显现”的视觉过程：噪声、遮蔽、显影、凝结，构成一种关于心性、感知与行动的图像化叙事。",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "02/content_slots/03_overview/3.jpg",
+                                                              "02/content_slots/03_overview/4.jpg",
+                                                              "02/content_slots/03_overview/5.png",
+                                                              "02/content_slots/03_overview/6.png",
+                                                              "02/content_slots/03_overview/11.jpg"
+                                                      ]
+                                              }
+                                      ]
+                              }
+                      ]
+              },
+              "en": {
+                      "cv": {
+                              "role": "Mingheng Xu",
+                              "photo": "00/media/d7dbdfad42631df10aef8172071a8607.png",
+                              "name": "Mingheng Xu",
+                              "email": "1296830059@qq.com",
+                              "education": [
+                                      "Wuhan University",
+                                      "School of Urban Design",
+                                      "Department of Design",
+                                      "Product Design",
+                                      "2024-2028"
+                              ],
+                              "awards": [
+                                      "#Wuhan University First-Class Scholarship / Special Scholarship 2025",
+                                      "#Award 360° Annual Digital Media Design Shortlist 2025",
+                                      "#Kan Tai-Keung Design Award, Student Category, Excellence Award 2025"
+                              ],
+                              "experience": [
+                                      "WHU Student Union - LuoJia Studio Lead 2024.9 -",
+                                      "CAA D&A Lab Member 2026.4 -"
+                              ],
+                              "tools": [
+                                      "Adobe",
+                                      "Figma",
+                                      "Rhino/Grasshopper",
+                                      "Blender",
+                                      "Processing",
+                                      "touchDesigner",
+                                      "UE",
+                                      "Unity"
+                              ],
+                              "fields": [
+                                      "#User Experience Design",
+                                      "#HCI Design / Art",
+                                      "#Visual Design",
+                                      "#Speculative Design",
+                                      "#Graphic and Motion Design",
+                                      "#XR Design"
+                              ]
+                      },
+                      "projects": [
+                              {
+                                      "slug": "topological-regime-forceflow",
+                                      "title": "Topological Regime",
+                                      "subtitle": "Planetary Scale and Body Narrative",
+                                      "category": "Speculative Design / Parametric Generation / XR",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "03/content_slots/01_cover/67962edbeb7be741c3b39b230d0bab08.png"
+                                              },
+                                              "If the physical rules of the world changed, would human bodies, tools, and societies still exist in their current form?\n\nTopological Regime is an experimental design research project combining parametric morphology generation, human dynamics, design fiction, and XR immersive experience. It begins from a counterfactual question: if humans did not live under Earth's current gravity, atmosphere, terrain, and climate, how would bodily movement, skeletal structure, and bodily systems be reshaped?\n\nThe project treats planetary conditions as generative premises for bodily and structural form. Gravity, atmospheric density, surface friction, rock formation, storm frequency, lighting conditions, and terrain scale on different planets would alter how individuals move, climb, carry weight, avoid danger, collaborate, and build. Over time, these environmental pressures would not only affect posture and movement mechanisms, but also transform wearable devices, assistive structures, architectural systems, and social organization. The project therefore proposes the idea of a topological regime: beyond law, rules, or social order, a regime can also be understood as a topological structure jointly produced by body, environment, technology, and space.\n\nThe project attempts to use mature topology optimization techniques from engineering workflows as its core generative logic. In this design, morphology generation is redefined as a coupling flow that connects body, task, environment, and structure. The basic methodology is graph → form → state: first, bodily posture, movement paths, force directions, terrain conditions, task demands, and environmental constraints are translated into visual fields, vectors, or graph structures; then, through streamline tracing, skeleton generation, lattice filling, and topological growth, structural candidates are generated; finally, manufacturing constraints and environmental adaptability are evaluated and fed back to form a closed-loop design process.\n\nThe project is progressing toward the Grasshopper / GH Python prototyping stage, involving field construction, IDW interpolation, surface streamline tracing, seed point control, skeleton generation, basic evaluation reports, and manufacturing constraint checks. Later development will continue toward three-dimensional force-flow lattice generation and complex surface stability optimization.\n\nAt the visual and experiential level, Topological Regime builds immersive planetary environments in Unreal Engine, exploring procedural terrain generation, large-scale natural landforms, special weather systems, first-person / third-person body skeleton visualization, and XR experience. The project aims to let viewers perceive a clear causal chain: how planetary conditions reshape terrain, how terrain changes bodily movement, how bodily movement generates new structural forms, and how those forms eventually shape a new mode of survival.",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "03/content_slots/03_overview/1.png",
+                                                              "03/content_slots/03_overview/2.png",
+                                                              "03/content_slots/03_overview/P8.png",
+                                                              "03/content_slots/03_overview/P9.png",
+                                                              "03/content_slots/03_overview/P10P11.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "03/content_slots/01_cover/67962edbeb7be741c3b39b230d0bab08.png"
+                              },
+                              {
+                                      "slug": "pocket-ai-fitness-coach",
+                                      "title": "kinetic",
+                                      "subtitle": "A CMF and Interaction Hardware Study for a Sports Technology Product",
+                                      "category": "Industrial Design / CMF / Smart Hardware",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "04/content_slots/02_video_upload/kine.mp4"
+                                              },
+                                              "This school-enterprise collaboration project is based on a specific product concept provided by a company: a pocket-sized AI fitness coach. It focuses on the CMF language, structural logic, use flow, and product ecosystem of smart hardware in sports scenarios. The product consists of a portable camera-equipped main unit and an earphone feedback device. It can connect to a phone, tablet, or television through Bluetooth, providing motion recognition, status feedback, training records, and multi-screen collaboration during workouts.\n\nIn product definition, the project responds to the combined needs of lightweight portability, visual recognition, and exercise companionship. The main unit needs to support handheld use, pocket storage, and desktop placement, while also considering camera orientation, screen readability, button operation, and long-distance status recognition.\n\nFor CMF research, the project references high-saturation sports brand language, translucent technology products, gel-like materials, micro-ribbed surfaces, spray finishing, matte plastics, transparent shells, and visible internal structures. It aims to form a product character between sports, technology, and futurity. In particular, the contrast between translucent and opaque materials allows the product to express both professional equipment and lightweight consumer electronics.\n\nThe project integrates product use flow, hardware structure, material processes, human body scale, and brand visual temperament into an industrial product design workflow, while introducing a personally stylized conceptual expression.",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "04/content_slots/03_overview/A.png",
+                                                              "04/content_slots/03_overview/A0.png",
+                                                              "04/content_slots/03_overview/A1.png",
+                                                              "04/content_slots/03_overview/A2.png",
+                                                              "04/content_slots/03_overview/A3.png",
+                                                              "04/content_slots/03_overview/A4.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "04/content_slots/01_cover/6fbdee375a6c515d2acecd74f5b4e05d.png"
+                              },
+                              {
+                                      "slug": "assistive-hand-gesture",
+                                      "title": "HANDI Assistive Hand Gesture",
+                                      "subtitle": "A Low-burden Gesture Interaction System for Everyday Semantic Communication",
+                                      "category": "HCI / Assistive Technology / Information Design",
+                                      "year": "2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png"
+                                              },
+                                              "Assistive Hand Gesture is an interaction design project around gesture, semantic graphics, typography, and social care. It is not focused on strict medical contexts or professional sign-language translation. Instead, it asks how meanings that are difficult to express or understand in everyday life can be seen in a lighter and lower-burden way. It addresses Deaf and hard-of-hearing communities, sign-language users, and more broadly anyone who needs support in public communication, exploring a medium between gesture recognition, graphic symbols, and dynamic text.",
+                                              "The project uses MediaPipe for hand skeleton recognition, capturing hand landmarks, motion range, rhythm, and state changes in real time through a camera. It does not attempt to achieve high-precision translation of a complex sign-language vocabulary at the beginning. Instead, it starts from a small set of high-contact meanings such as help, stop, calming, and breathing rhythm, building a small-sample, expandable, and customizable gesture-semantic library. Users can trigger corresponding graphic symbols, text feedback, and visual rhythms through simple gestures, forming a lightweight communication support mechanism.",
+                                              "Visually, the project emphasizes clear layering between text, skeleton lines, symbols, and grid-based interface elements. Rather than compressing all information roughly onto the camera image, it uses web-based HTML, CSS, SVG, and Canvas to present typography, dynamic symbols, hand tracking, and debugging information in separate layers. The project also introduces information design and accessible typography principles, paying attention to line spacing, letter spacing, reading width, visual rhythm, and symbol legibility so that the interface is not only functional but also friendly for communication and reading.",
+                                              "The most important aspect of this project is that it releases assistive technology from a heavy compensatory logic and turns it toward a more everyday, lighter, and more playful form of social communication design. It can function as an HCI / VINCI poster or art gallery experiment, while also showing user research, interaction prototyping, visual systems, and social design capability within a portfolio.",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "05/content_slots/03_overview/P2.png",
+                                                              "05/content_slots/03_overview/P3.png",
+                                                              "05/content_slots/03_overview/P4.png",
+                                                              "05/content_slots/03_overview/P5.png"
+                                                      ]
+                                              }
+                                      ],
+                                      "cover": "05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png"
+                              },
+                              {
+                                      "slug": "live-game",
+                                      "title": "Live_Game",
+                                      "subtitle": "An Embodied Emotional Regulation System for Medical Public Spaces",
+                                      "category": "Interaction Design / HCI / Digital Media Art",
+                                      "year": "2025",
+                                      "cover": "01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png",
+                                      "award": "Award 360° Annual Digital Media Design Shortlist 2025",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "01/content_slots/02_video_upload/Live_Game_Demo.mp4"
+                                              },
+                                              "Live_Game is an interactive digital media project for medical public spaces. It responds to the tension, anxiety, and helplessness often found in waiting areas, transitional treatment spaces, and hospital corridors. Rather than treating medical space only as a functional site of efficient management, the project reimagines it as an emotional interface that can be sensed, entered, and regulated through the body.",
+                                              "Based on Conway's Game of Life, the system combines Processing, OpenCV, and real-time camera-based motion detection. Bodily movement is translated into disturbance factors within a cellular automata system. Passing, pausing, swaying, and approaching all affect the growth, diffusion, decay, and color changes of cells on screen. Through the relationship between self-organizing rules and bodily disturbance, emotional regulation becomes a participatory dynamic process rather than static decoration.",
+                                              "Technically, the project includes cell update logic, camera motion differencing, emotional color mapping, dynamic motion trails, diffusion speed control, and interaction intensity feedback. The system does not pursue strong control or explicit task completion. Instead, it emphasizes a lightweight, low-pressure, ambient interaction: viewers do not need to learn a complex operation, and the space responds gently as their bodies naturally pass through it.",
+                                              "At the research level, the project draws from embodied cognition and environmental psychology to discuss how the body participates in emotional regulation through perception-action loops. It is both an interactive prototype and a reflection on the design logic of public medical spaces: healing does not always come from explicit treatment, but can also emerge from a spatial system that allows people to be seen, responded to, and buffered.",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/03_overview/fi2.png",
+                                                              "01/content_slots/03_overview/fi3.png",
+                                                              "01/content_slots/03_overview/fi4.png",
+                                                              "01/content_slots/03_overview/fi5.png",
+                                                              "01/content_slots/03_overview/fi6.png",
+                                                              "01/content_slots/03_overview/fi7.png",
+                                                              "01/content_slots/03_overview/fi8.png",
+                                                              "01/content_slots/03_overview/fi9.png",
+                                                              "01/content_slots/03_overview/fi10.png",
+                                                              "01/content_slots/03_overview/fi11.png"
+                                                      ]
+                                              },
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/04_context/24c531ad9abf604fdc7b1fa19e62f676.png",
+                                                              "01/content_slots/04_context/52603aef309003ed86bd487d70557940.png",
+                                                              "01/content_slots/04_context/633486c7d79a427fe1bcbcfe062be47b.jpg",
+                                                              "01/content_slots/04_context/b3f55a804a48dc38485aafd7ab9b2f95.png"
+                                                      ]
+                                              },
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "01/content_slots/05_interaction_flow/1(3).jpg",
+                                                              "01/content_slots/05_interaction_flow/84d4c59ac8f5553264eaabda5c4e9537.png",
+                                                              "01/content_slots/05_interaction_flow/920c110156070c12944f87ee9f4419bf.png"
+                                                      ]
+                                              }
+                                      ]
+                              },
+                              {
+                                      "slug": "algorithmic-xinxue",
+                                      "title": "Algorithmic Xinxue",
+                                      "subtitle": "A Philosophical Interaction Experiment from Embodied Disturbance to Real-time Generated Images",
+                                      "category": "Interactive Art / Generative Image / Philosophical Media",
+                                      "year": "2025",
+                                      "cover": "02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png",
+                                      "modules": [
+                                              {
+                                                      "type": "image",
+                                                      "src": "02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png"
+                                              },
+                                              {
+                                                      "type": "video",
+                                                      "src": "02/content_slots/02_video_upload/XinXue_1.mp4"
+                                              },
+                                              "Algorithmic Xinxue is a digital media experiment that connects Chinese Xinxue philosophy, real-time interaction systems, and generative image technology. Based on Wang Yangming's ideas such as mind as principle, innate knowing, the unity of knowledge and action, the obscuring of selfish desire, and cultivation through practice, the project attempts to translate abstract philosophical structures into an operational, perceptible, and interactive algorithmic system.",
+                                              "The core mechanism of the project is disturbance, feedback, and return to stability. Viewers intervene through bodily movement, breaking an originally stable visual state. The system then transforms this disturbance into an evolving image process through feedback, delay, layering, decay, and recovery. In its early stage, the project used TouchDesigner to build fractal, feedback, noise, and brightness-field systems, while MediaPipe captured hand opening gestures and mapped them to visual parameters, making the body an entry point for activating philosophical concepts.",
+                                              "In the later technical path, the project plans to integrate StreamDiffusion, translating real-time noise fields into concrete images such as monochrome mountains, water, forests, and trees as a visual process from chaos to manifestation: noise, concealment, emergence, and condensation form an image-based narrative about mind, perception, and action.",
+                                              {
+                                                      "type": "imageGrid",
+                                                      "images": [
+                                                              "02/content_slots/03_overview/3.jpg",
+                                                              "02/content_slots/03_overview/4.jpg",
+                                                              "02/content_slots/03_overview/5.png",
+                                                              "02/content_slots/03_overview/6.png",
+                                                              "02/content_slots/03_overview/11.jpg"
+                                                      ]
+                                              }
+                                      ]
+                              }
+                      ]
+              }
+      };
+
+      const state = {
+        locale: "zh",
+        view: "cv",
+        slug: "",
+        hoverSlug: ""
+      };
+
+      const main = document.querySelector("#main");
+      const projectNav = document.querySelector("#projectNav");
+      const cvButton = document.querySelector("#cvButton");
+      const projectsButton = document.querySelector("#projectsButton");
+      const zhButton = document.querySelector("#zhButton");
+      const enButton = document.querySelector("#enButton");
+
+      function currentProjects() {
+        return content[state.locale].projects;
+      }
+
+      function moduleHtml(module) {
+        if (typeof module === "string") {
+          return `<section class="module"><p>${module}</p></section>`;
+        }
+
+        const title = module.title ? `<h2>${module.title}</h2>` : "";
+        if (module.type === "image") {
+          return `<section class="module">${title}<img class="mediaAsset" src="${module.src}" alt="${module.title || ""}" /></section>`;
+        }
+
+        if (module.type === "video") {
+          return `<section class="module">${title}<video class="mediaAsset" controls src="${module.src}"></video></section>`;
+        }
+
+        if (module.type === "imageGrid") {
+          return `<section class="module">${title}<div class="mediaGrid">${module.images
+            .map((src) => `<img class="mediaAsset" src="${src}" alt="${module.title || ""}" />`)
+            .join("")}</div></section>`;
+        }
+
+        return `<section class="module">${title}<p>${module.body || ""}</p></section>`;
+      }
+
+      function splitCvDate(value) {
+        const match = value.match(/^(.*?)(\s*\d{4}\.\d+\s*-\s*)$/);
+        return match ? { label: match[1].trim(), date: match[2].trim() } : { label: value, date: "" };
+      }
+
+      function setHash() {
+        const next = state.view === "project" ? `${state.locale}/${state.slug}` : `${state.locale}/${state.view}`;
+        if (window.location.hash.replace("#", "") !== next) window.location.hash = next;
+      }
+
+      function syncButtons() {
+        cvButton.classList.toggle("active", state.view === "cv");
+        projectsButton.classList.toggle("active", state.view === "projects" || state.view === "project");
+        zhButton.classList.toggle("active", state.locale === "zh");
+        enButton.classList.toggle("active", state.locale === "en");
+      }
+
+      function renderNav() {
+        const highlightedSlug = state.hoverSlug || (state.view === "project" ? state.slug : "");
+        projectNav.classList.toggle("open", state.view === "projects" || state.view === "project");
+        projectNav.innerHTML = currentProjects()
+          .map(
+            (project) =>
+              `<li><a href="#${state.locale}/${project.slug}" class="${highlightedSlug === project.slug ? "active" : ""}" data-route="${project.slug}">${project.title}</a></li>`
+          )
+          .join("");
+      }
+
+      function renderCv() {
+        const cv = content[state.locale].cv;
+        main.innerHTML = `
+          <section class="cvLayout">
+            <div class="cvColumn cvColumnFields">
+              <div class="cvFields">
+                ${cv.fields.map((field) => `<p>${field}</p>`).join("")}
+              </div>
+            </div>
+
+            <div class="cvColumn cvColumnTools">
+              <div class="cvTools">
+                ${cv.tools.map((tool) => `<p>${tool}</p>`).join("")}
+              </div>
+            </div>
+
+            <div class="cvColumn cvColumnProfile">
+              <div class="cvIntro">
+                <img class="cvPhoto" src="${cv.photo}" alt="${cv.name}" />
+                <h1 class="cvName">${cv.name}</h1>
+                <p class="cvLocation">${state.locale === "zh" ? "广东 广州" : "Guangdong Guangzhou"}</p>
+                <p class="cvEmail">${cv.email}</p>
+                <p class="cvEducation">${cv.education.join("\n")}</p>
+              </div>
+
+              <div class="cvLower">
+                ${
+                  cv.experience
+                    ? `<div class="cvExperience">${cv.experience
+                        .map((item) => {
+                          const entry = splitCvDate(item);
+                          return `<p class="cvExperienceItem"><span>${entry.label}</span><span>${entry.date}</span></p>`;
+                        })
+                        .join("")}</div>`
+                    : ""
+                }
+                <div class="cvAwards">
+                  ${cv.awards.map((award) => `<p class="cvAward">${award}</p>`).join("")}
+                </div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderProjects() {
+        main.innerHTML = `
+          <section class="section projectListSection">
+            <h1 class="pageTitle">Projects</h1>
+            <div class="projectPreviewList">
+              ${currentProjects()
+                .map(
+                  (project) =>
+                    `<a class="projectPreview" aria-label="${project.title}" href="#${state.locale}/${project.slug}" data-route="${project.slug}" data-preview="${project.slug}">${
+                      project.cover ? `<img src="${project.cover}" alt="" />` : ""
+                    }</a>`
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderProject() {
+        const project = currentProjects().find((item) => item.slug === state.slug);
+        if (!project) {
+          state.view = "projects";
+          state.slug = "";
+          renderProjects();
+          return;
+        }
+        main.innerHTML = `
+          <section class="section">
+            <div class="projectHeader">
+              <h1 class="pageTitle">${project.title}</h1>
+              ${project.award ? `<p class="projectAward">${project.award}</p>` : ""}
+            </div>
+            ${project.subtitle ? `<p class="subtitle">${project.subtitle}</p>` : ""}
+            ${project.modules.map(moduleHtml).join("")}
+          </section>
+        `;
+      }
+
+      function render() {
+        document.documentElement.lang = state.locale === "zh" ? "zh-CN" : "en";
+        syncButtons();
+        renderNav();
+        if (state.view === "cv") renderCv();
+        if (state.view === "projects") renderProjects();
+        if (state.view === "project") renderProject();
+      }
+
+      function routeFromHash() {
+        const raw = window.location.hash.replace("#", "");
+        const [maybeLocale, maybeRoute] = raw.split("/");
+        state.locale = maybeLocale === "en" ? "en" : "zh";
+        state.hoverSlug = "";
+        if (!maybeRoute || maybeRoute === "cv") {
+          state.view = "cv";
+          state.slug = "";
+        } else if (maybeRoute === "projects") {
+          state.view = "projects";
+          state.slug = "";
+        } else {
+          state.view = "project";
+          state.slug = maybeRoute;
+        }
+        render();
+      }
+
+      cvButton.addEventListener("click", () => {
+        state.view = "cv";
+        state.slug = "";
+        state.hoverSlug = "";
+        setHash();
+        render();
+      });
+
+      projectsButton.addEventListener("click", () => {
+        state.view = "projects";
+        state.slug = "";
+        state.hoverSlug = "";
+        setHash();
+        render();
+      });
+
+      zhButton.addEventListener("click", () => {
+        state.locale = "zh";
+        state.hoverSlug = "";
+        setHash();
+        render();
+      });
+
+      enButton.addEventListener("click", () => {
+        state.locale = "en";
+        state.hoverSlug = "";
+        setHash();
+        render();
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-route]");
+        if (!target) return;
+        state.view = "project";
+        state.slug = target.dataset.route;
+        state.hoverSlug = "";
+        setHash();
+        render();
+      });
+
+      document.addEventListener("mouseover", (event) => {
+        const target = event.target.closest("[data-preview]");
+        if (!target) return;
+        state.hoverSlug = target.dataset.preview;
+        renderNav();
+      });
+
+      document.addEventListener("mouseout", (event) => {
+        const target = event.target.closest("[data-preview]");
+        if (!target) return;
+        state.hoverSlug = "";
+        renderNav();
+      });
+
+      document.addEventListener("focusin", (event) => {
+        const target = event.target.closest("[data-preview]");
+        if (!target) return;
+        state.hoverSlug = target.dataset.preview;
+        renderNav();
+      });
+
+      document.addEventListener("focusout", (event) => {
+        const target = event.target.closest("[data-preview]");
+        if (!target) return;
+        state.hoverSlug = "";
+        renderNav();
+      });
+
+      window.addEventListener("hashchange", routeFromHash);
+      routeFromHash();
+    </script>
+  </body>
+</html>

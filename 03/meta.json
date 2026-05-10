@@ -1,0 +1,26 @@
+{
+  "slug": "topological-regime-forceflow",
+  "type": "project",
+  "title": {
+    "zh": "拓扑制度",
+    "en": "Topological Regime"
+  },
+  "subtitle": {
+    "zh": "行星尺度与身体叙事",
+    "en": "Planetary Scale and Body Narrative"
+  },
+  "category": {
+    "zh": "前沿设计 / 参数化生成 / XR",
+    "en": "Speculative Design / Parametric Generation / XR"
+  },
+  "year": "2025",
+  "tools": [
+    "Grasshopper",
+    "GH Python",
+    "Unreal Engine",
+    "XR"
+  ],
+  "cover": "/media/03/content_slots/01_cover/67962edbeb7be741c3b39b230d0bab08.png",
+  "featured": true,
+  "order": 1
+}

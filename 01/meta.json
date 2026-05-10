@@ -1,0 +1,25 @@
+{
+  "slug": "live-game",
+  "type": "project",
+  "title": {
+    "zh": "Live_Game",
+    "en": "Live_Game"
+  },
+  "subtitle": {
+    "zh": "基于生命游戏的医疗公共空间情绪疗愈交互系统",
+    "en": "An Embodied Emotional Regulation System for Medical Public Spaces"
+  },
+  "category": {
+    "zh": "交互设计 / HCI / 数字媒体艺术",
+    "en": "Interaction Design / HCI / Digital Media Art"
+  },
+  "year": "2025",
+  "tools": ["Processing", "OpenCV", "Camera Interaction", "Cellular Automata"],
+  "cover": "/media/01/content_slots/01_cover/aa16d4d25e9a4f47878719f9f2df9176.png",
+  "award": {
+    "zh": "Award 360° 年度数字媒体设计入围 2025",
+    "en": "Award 360° Annual Digital Media Design Shortlist 2025"
+  },
+  "featured": true,
+  "order": 4
+}

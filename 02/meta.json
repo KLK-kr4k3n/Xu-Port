@@ -1,0 +1,21 @@
+{
+  "slug": "algorithmic-xinxue",
+  "type": "project",
+  "title": {
+    "zh": "算法心学",
+    "en": "Algorithmic Xinxue"
+  },
+  "subtitle": {
+    "zh": "从具身扰动到实时生成图像的哲学交互实验",
+    "en": "A Philosophical Interaction Experiment from Embodied Disturbance to Real-time Generated Images"
+  },
+  "category": {
+    "zh": "交互艺术 / 生成图像 / 哲学媒介",
+    "en": "Interactive Art / Generative Image / Philosophical Media"
+  },
+  "year": "2025",
+  "tools": ["TouchDesigner", "MediaPipe", "StreamDiffusion"],
+  "cover": "/media/02/content_slots/01_cover/4eb0c71a0873c50f1899bfccf0316cb0.png",
+  "featured": true,
+  "order": 5
+}

@@ -1,0 +1,33 @@
+{
+  "modules": [
+    {
+      "type": "image",
+      "src": "/media/05/content_slots/01_cover/80ac8c48952e9ab81e9acc7bcba415cd.png"
+    },
+    {
+      "type": "intro",
+      "body": "Assistive Hand Gesture is an interaction design project around gesture, semantic graphics, typography, and social care. It is not focused on strict medical contexts or professional sign-language translation. Instead, it asks how meanings that are difficult to express or understand in everyday life can be seen in a lighter and lower-burden way. It addresses Deaf and hard-of-hearing communities, sign-language users, and more broadly anyone who needs support in public communication, exploring a medium between gesture recognition, graphic symbols, and dynamic text."
+    },
+    {
+      "type": "text",
+      "body": "The project uses MediaPipe for hand skeleton recognition, capturing hand landmarks, motion range, rhythm, and state changes in real time through a camera. It does not attempt to achieve high-precision translation of a complex sign-language vocabulary at the beginning. Instead, it starts from a small set of high-contact meanings such as help, stop, calming, and breathing rhythm, building a small-sample, expandable, and customizable gesture-semantic library. Users can trigger corresponding graphic symbols, text feedback, and visual rhythms through simple gestures, forming a lightweight communication support mechanism."
+    },
+    {
+      "type": "text",
+      "body": "Visually, the project emphasizes clear layering between text, skeleton lines, symbols, and grid-based interface elements. Rather than compressing all information roughly onto the camera image, it uses web-based HTML, CSS, SVG, and Canvas to present typography, dynamic symbols, hand tracking, and debugging information in separate layers. The project also introduces information design and accessible typography principles, paying attention to line spacing, letter spacing, reading width, visual rhythm, and symbol legibility so that the interface is not only functional but also friendly for communication and reading."
+    },
+    {
+      "type": "text",
+      "body": "The most important aspect of this project is that it releases assistive technology from a heavy compensatory logic and turns it toward a more everyday, lighter, and more playful form of social communication design. It can function as an HCI / VINCI poster or art gallery experiment, while also showing user research, interaction prototyping, visual systems, and social design capability within a portfolio."
+    },
+    {
+      "type": "imageGrid",
+      "images": [
+        "/media/05/content_slots/03_overview/P2.png",
+        "/media/05/content_slots/03_overview/P3.png",
+        "/media/05/content_slots/03_overview/P4.png",
+        "/media/05/content_slots/03_overview/P5.png"
+      ]
+    }
+  ]
+}
