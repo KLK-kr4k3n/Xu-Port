@@ -240,6 +240,31 @@ a:visited {
   width: 100%;
 }
 
+.videoSourceSwitch {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.videoSourceButton {
+  appearance: none;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  cursor: pointer;
+  display: block;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  width: 12px;
+}
+
+.videoSourceButton.active {
+  background: var(--ink);
+}
+
 .videoLink {
   border: 1px solid var(--line);
   display: block;

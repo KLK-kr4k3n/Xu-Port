@@ -37,6 +37,10 @@ export type ContentModule =
       type: "image" | "diagram" | "video";
       title?: string;
       src: string;
+      sources?: {
+        label: string;
+        src: string;
+      }[];
       caption?: string;
     }
   | {

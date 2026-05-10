@@ -6,7 +6,17 @@
     },
     {
       "type": "video",
-      "src": "https://www.bilibili.com/video/BV1QfRMBjECe/?spm_id_from=333.1387.homepage.video_card.click&vd_source=e6b7bd00b88d9cc07efba37316054464"
+      "src": "https://www.youtube.com/watch?v=09KQ594qJ-g",
+      "sources": [
+        {
+          "label": "线路1",
+          "src": "https://www.youtube.com/watch?v=09KQ594qJ-g"
+        },
+        {
+          "label": "线路2",
+          "src": "https://www.bilibili.com/video/BV1QfRMBjECe/?spm_id_from=333.1387.homepage.video_card.click&vd_source=e6b7bd00b88d9cc07efba37316054464"
+        }
+      ]
     },
     {
       "type": "intro",
