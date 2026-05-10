@@ -225,6 +225,31 @@ a:visited {
   width: 100%;
 }
 
+.videoFrame {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+.videoEmbed {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.videoLink {
+  border: 1px solid var(--line);
+  display: block;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 18px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .mediaRow,
 .mediaGrid {
   display: grid;
