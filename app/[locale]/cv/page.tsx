@@ -8,7 +8,7 @@ export function generateStaticParams() {
   return [{ locale: "zh" }, { locale: "en" }];
 }
 
-export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {
+export default async function CvPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const locale = normalizeLocale(rawLocale);
   const cv = getCvMeta();
@@ -16,8 +16,8 @@ export default async function LocaleHome({ params }: { params: Promise<{ locale:
   const projects = getProjects();
 
   return (
-    <div className="shell mobileLandingShell">
-      <Sidebar cv={cv} locale={locale} projects={projects} activeSection="cv" isLanding />
+    <div className="shell cvShell">
+      <Sidebar cv={cv} locale={locale} projects={projects} activeSection="cv" />
       <main className="main">
         <CvLayout content={cvContent} />
       </main>

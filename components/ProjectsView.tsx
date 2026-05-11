@@ -15,7 +15,7 @@ export function ProjectsView({ cv, locale, projects }: ProjectsViewProps) {
   const [hoverSlug, setHoverSlug] = useState<string | undefined>();
 
   return (
-    <div className="shell">
+    <div className="shell projectsShell">
       <Sidebar cv={cv} locale={locale} projects={projects} activeSection="projects" hoverSlug={hoverSlug} />
       <main className="main">
         <section className="section projectListSection">
@@ -32,6 +32,7 @@ export function ProjectsView({ cv, locale, projects }: ProjectsViewProps) {
                 onMouseEnter={() => setHoverSlug(project.slug)}
                 onMouseLeave={() => setHoverSlug(undefined)}
               >
+                <span className="projectPreviewTitle">{project.title[locale]}</span>
                 {project.cover ? <img src={project.cover} alt="" /> : null}
               </Link>
             ))}

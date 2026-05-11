@@ -446,7 +446,12 @@ a:visited {
   border: 1px solid var(--line);
   display: block;
   overflow: hidden;
+  position: relative;
   width: 100%;
+}
+
+.projectPreviewTitle {
+  display: none;
 }
 
 .projectPreview img {
@@ -494,8 +499,78 @@ a:visited {
   }
 
   .sidebar {
+    border-bottom: 1px solid var(--soft);
+    border-right: 0;
     height: auto;
     position: relative;
+  }
+
+  .mobileLandingShell .main {
+    display: none;
+  }
+
+  .langSwitch {
+    display: none;
+  }
+
+  .mobileLandingShell {
+    min-height: 100vh;
+  }
+
+  .mobileLandingShell .langSwitch {
+    bottom: 24px;
+    display: grid;
+    left: 22px;
+    position: fixed;
+  }
+
+  .mobileLandingShell .navButton.active,
+  .mobileLandingShell .navButton.active:visited {
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .projectsShell .projectNav {
+    display: none;
+  }
+
+  .projectListSection .pageTitle {
+    display: none;
+  }
+
+  .projectPreviewList {
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  .projectPreviewTitle {
+    background: var(--ink);
+    color: var(--bg);
+    display: block;
+    font-size: 18px;
+    font-style: italic;
+    left: 0;
+    line-height: 1.2;
+    max-width: calc(100% - 24px);
+    overflow: hidden;
+    padding: 6px 10px;
+    position: absolute;
+    text-overflow: clip;
+    top: 0;
+    white-space: nowrap;
+    z-index: 1;
+  }
+
+  .projectDetailShell .sidebar {
+    display: none;
+  }
+
+  .projectDetailShell .main {
+    padding: 0;
+  }
+
+  .projectDetailShell .section {
+    max-width: none;
   }
 
   .main {
