@@ -21,7 +21,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ locale
   if (!project || !content) notFound();
 
   return (
-    <div className="shell projectDetailShell">
+    <div className={`shell projectDetailShell locale-${locale}`}>
       <Sidebar cv={cv} locale={locale} projects={projects} activeSection="projects" activeSlug={slug} />
       <main className="main">
         <section className="section">

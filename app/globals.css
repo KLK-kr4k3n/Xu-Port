@@ -614,6 +614,24 @@ a:visited {
     text-align: left;
   }
 
+  .projectDetailShell.locale-zh .subtitle,
+  .projectDetailShell.locale-zh .module p:not(.caption) {
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: justify;
+    text-align-last: left;
+    text-justify: inter-ideograph;
+  }
+
+  .projectDetailShell.locale-en .subtitle,
+  .projectDetailShell.locale-en .module p:not(.caption) {
+    hyphens: auto;
+    padding-left: 3ch;
+    padding-right: 3ch;
+    text-align: justify;
+    text-align-last: left;
+  }
+
   .cvLayout {
     display: flex;
     flex-direction: column;
