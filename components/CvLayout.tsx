@@ -17,6 +17,11 @@ function splitDate(value: string) {
   return match ? { label: match[1].trim(), date: match[2].trim() } : { label: value, date: "" };
 }
 
+function splitAwardDate(value: string) {
+  const match = value.match(/^(.*?)(\s+\d{4})$/);
+  return match ? { label: match[1].trim(), date: match[2].trim() } : { label: value, date: "" };
+}
+
 export function CvLayout({ content }: { content: ContentFile }) {
   const imageModule = content.modules.find((module) => module.type === "image" && "src" in module);
   const introModule = content.modules.find((module) => module.type === "intro" && "body" in module);
@@ -75,11 +80,15 @@ export function CvLayout({ content }: { content: ContentFile }) {
           ) : null}
 
           <div className="cvAwards">
-          {awards.map((award) => (
-            <p className="cvAward" key={award}>
-              {award}
-            </p>
-          ))}
+            {awards.map((award) => {
+              const entry = splitAwardDate(award);
+              return (
+                <p className="cvAward" key={award}>
+                  <span className="cvAwardLabel">{entry.label}</span>
+                  {entry.date ? <span className="cvAwardDate">{entry.date}</span> : null}
+                </p>
+              );
+            })}
           </div>
         </div>
       </div>

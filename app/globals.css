@@ -408,6 +408,10 @@ a:visited {
   margin: 0 0 16px;
 }
 
+.cvAwardDate::before {
+  content: " ";
+}
+
 .cvTools {
   font-size: 18px;
   line-height: 1.28;
@@ -664,6 +668,15 @@ a:visited {
 
   .cvAwards {
     text-align: left;
+  }
+
+  .cvAwardDate {
+    display: block;
+    padding-left: 0.72em;
+  }
+
+  .cvAwardDate::before {
+    content: "";
   }
 
   .cvAward,
