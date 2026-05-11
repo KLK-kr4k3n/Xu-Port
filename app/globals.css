@@ -509,25 +509,34 @@ a:visited {
     display: none;
   }
 
-  .langSwitch {
-    display: none;
-  }
-
   .mobileLandingShell {
     min-height: 100vh;
-  }
-
-  .mobileLandingShell .langSwitch {
-    bottom: 24px;
-    display: grid;
-    left: 22px;
-    position: fixed;
   }
 
   .mobileLandingShell .navButton.active,
   .mobileLandingShell .navButton.active:visited {
     background: var(--bg);
     color: var(--ink);
+  }
+
+  .langSwitch {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    bottom: 18px;
+    display: grid;
+    font-size: 12px;
+    grid-template-columns: 28px 8px 20px;
+    left: 22px;
+    line-height: 18px;
+    padding: 2px 4px;
+    position: fixed;
+    width: auto;
+    z-index: 20;
+  }
+
+  .langSwitch a {
+    height: 18px;
+    line-height: 18px;
   }
 
   .projectsShell .projectNav {
@@ -562,6 +571,16 @@ a:visited {
   }
 
   .projectDetailShell .sidebar {
+    border: 0;
+    height: 0;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .projectDetailShell .identity,
+  .projectDetailShell .navButton,
+  .projectDetailShell .projectNav,
+  .projectDetailShell .sidebar br {
     display: none;
   }
 
@@ -592,7 +611,8 @@ a:visited {
   }
 
   .cvLayout {
-    display: block;
+    display: flex;
+    flex-direction: column;
     min-height: auto;
     padding-top: 0;
   }
@@ -601,10 +621,30 @@ a:visited {
     min-height: auto;
   }
 
+  .cvColumnFields {
+    display: block;
+    order: 2;
+    padding-bottom: 0;
+  }
+
+  .cvColumnTools {
+    display: block;
+    order: 3;
+    padding-top: 0;
+  }
+
+  .cvColumnProfile {
+    align-items: stretch;
+    order: 1;
+  }
+
   .cvIntro,
   .cvLower,
-  .cvFields {
+  .cvFields,
+  .cvTools {
     margin-left: 0;
+    max-width: 100%;
+    width: 100%;
   }
 
   .cvTools {
@@ -614,5 +654,12 @@ a:visited {
 
   .cvFields {
     margin-top: 100px;
+  }
+
+  .cvEducation,
+  .cvAward,
+  .cvExperienceItem span:first-child {
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 }
