@@ -211,6 +211,20 @@ a:visited {
   white-space: pre-line;
 }
 
+.projectDetailShell.locale-zh .subtitle,
+.projectDetailShell.locale-zh .module p:not(.caption) {
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-ideograph;
+}
+
+.projectDetailShell.locale-en .subtitle,
+.projectDetailShell.locale-en .module p:not(.caption) {
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: left;
+}
+
 .caption {
   color: var(--muted);
   font-size: 14px;
